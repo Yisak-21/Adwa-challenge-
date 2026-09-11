@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adwa Challenge - Interactive Prototype</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React & React DOM -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <!-- Babel compiler for inline JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-900 flex items-center justify-center min-h-screen p-2 sm:p-6 font-sans select-none">
+
+  <div id="root" class="w-full max-w-sm"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function AdwaApp() {
+      // Screen Flow States
+      // Flow: HOME -> CHALLENGES -> DETAILS -> GPS -> RESULT -> LEADERBOARD -> REWARDS -> SPECIALS
+      const [currentScreen, setCurrentScreen] = useState('HOME');
+      
+      // User Profile & Activity Data
+      const [user, setUser] = useState({
+        name: 'Yisak',
+        points: 14500,
+        todaySteps: 6420,
+        todayKm: 4.8,
+        todayCalories: 280,
+        activeChallengeKm: 32.4,
+        targetKm: 50.0,
+      });
+
+      // GPS Session Mock Data
+      const [isTracking, setIsTracking] = useState(false);
+      const [elapsedSeconds, setElapsedSeconds] = useState(0);
+      const [sessionKm, setSessionKm] = useState(0.0);
+      
+      // Selected Challenge context
+      const [selectedChallenge, setSelectedChallenge] = useState({
+        id: '50km-7days',
+        title: '50 KM in 7 Days',
+        category: 'Individual',
+        type: 'distance',
+        target: 50,
+        reward: '500 Pts + Badge',
+        sponsor: 'Adwa Sports'
+      });
+
+      // Interactive GPS Timer Simulation
+      useEffect(() => {
+        let interval = null;
+        if (isTracking) {
+          interval = setInterval(() => {
+            setElapsedSeconds(prev => prev + 1);
+            setSessionKm(prev => parseFloat((prev + 0.01).toFixed(2)));
+          }, 1000);
+        } else {
+          clearInterval(interval);
+        }
+        return () => clearInterval(interval);
+      }, [isTracking]);
+
+      const formatTime = (totalSeconds) => {
+        const mins = Math.floor(totalSeconds / 60);
+        const secs = totalSeconds % 60;
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      };
+
+      const completeActivity = () => {
+        setIsTracking(false);
+        setUser(prev => ({
+          ...prev,
+          points: prev.points + 250,
+          todayKm: parseFloat((prev.todayKm + sessionKm).toFixed(1)),
+          todaySteps: prev.todaySteps + Math.round(sessionKm * 1300),
+          activeChallengeKm: parseFloat((prev.activeChallengeKm + sessionKm).toFixed(1))
+        }));
+        setCurrentScreen('RESULT');
+      };
+
+      return (
+        /* Android Shell Container */
+        <div class="relative w-full h-[800px] bg-black rounded-[45px] p-3 shadow-2xl border-4 border-slate-700 overflow-hidden">
+          
+          {/* Camera Notch / Speaker Header */}
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-50 flex items-center justify-center">
+            <div class="w-12 h-1 bg-slate-800 rounded-full"></div>
+            <div class="w-3 h-3 bg-slate-900 rounded-full ml-3 border border-slate-700"></div>
+          </div>
+
+          {/* Android Status Bar */}
+          <div class="pt-2 px-5 pb-1 text-xs text-white flex justify-between items-center z-40 relative font-mono">
+            <span>09:30</span>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-wifi"></i>
+              <i class="fa-solid fa-signal"></i>
+              <i class="fa-solid fa-battery-full text-green-400"></i>
+            </div>
+          </div>
+
+          {/* Main Display Viewport */}
+          <div class="w-full h-[710px] bg-slate-50 text-slate-800 overflow-y-auto rounded-[32px] relative flex flex-col justify-between">
+
+            {/* SCREEN 1: HOME DASHBOARD */}
+            {currentScreen === 'HOME' && (
+              <div class="p-4 space-y-4 pb-20 animate-fade-in">
+                {/* Header */}
+                <div class="flex justify-between items-center pt-2">
+                  <div>
+                    <p class="text-xs text-slate-500 font-medium">Welcome back 👋</p>
+                    <h1 class="text-xl font-bold text-slate-900">Good Morning, {user.name}!</h1>
+                  </div>
+                  <div class="flex gap-2">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 border border-emerald-200">
+                      <i class="fa-solid fa-coins text-amber-500"></i> {user.points}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Today's Metrics Widget */}
+                <div class="bg-gradient-to-br from-emerald-600 to-teal-700 text-white p-4 rounded-2xl shadow-lg relative overflow-hidden">
+                  <div class="flex justify-between items-start mb-2">
+                    <span class="text-xs uppercase tracking-wider text-emerald-100 font-semibold">Today's Activity</span>
+                    <span class="text-xs bg-white/20 px-2 py-0.5 rounded-full">Addis Ababa</span>
+                  </div>
+                  
+                  <div class="flex items-baseline gap-2 mb-3">
+                    <h2 class="text-3xl font-extrabold">{user.todaySteps.toLocaleString()}</h2>
+                    <span class="text-sm font-medium text-emerald-100">Steps</span>
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-3 pt-2 border-t border-white/20">
+                    <div>
+                      <p class="text-xs text-emerald-200">Distance</p>
+                      <p class="text-lg font-bold"><i class="fa-solid fa-location-dot text-amber-300 text-xs"></i> {user.todayKm} KM</p>
+                    </div>
+                    <div>
+                      <p class="text-xs text-emerald-200">Calories</p>
+                      <p class="text-lg font-bold"><i class="fa-solid fa-fire text-amber-400 text-xs"></i> {user.todayCalories} kcal</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Active Challenge Progress Card */}
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-xs font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded">Active Challenge</span>
+                    <span class="text-xs text-slate-400">{user.activeChallengeKm} / {user.targetKm} KM</span>
+                  </div>
+                  <h3 class="font-bold text-slate-800 text-sm">50 KM in 7 Days (Individual)</h3>
+                  
+                  {/* Progress Bar */}
+                  <div class="w-full bg-slate-100 h-2.5 rounded-full my-3 overflow-hidden">
+                    <div class="bg-orange-500 h-full rounded-full transition-all duration-500" style={{ width: `${(user.activeChallengeKm / user.targetKm) * 100}%` }}></div>
+                  </div>
+
+                  <button 
+                    onClick={() => {
+                      setSelectedChallenge({
+                        id: '50km-7days',
+                        title: '50 KM in 7 Days',
+                        category: 'Individual',
+                        type: 'distance',
+                        target: 50,
+                        reward: '500 Pts + Badge',
+                        sponsor: 'Adwa Sports'
+                      });
+                      setCurrentScreen('DETAILS');
+                    }}
+                    class="w-full bg-slate-900 text-white font-semibold py-2 rounded-xl text-xs hover:bg-slate-800 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-play text-xs text-emerald-400"></i> Continue Activity
+                  </button>
+                </div>
+
+                {/* Quick Action Navigation Buttons */}
+                <div>
+                  <h3 class="font-bold text-slate-700 text-xs uppercase tracking-wider mb-2">Explore Movement Categories</h3>
+                  <div class="grid grid-cols-2 gap-2">
+                    <button onClick={() => setCurrentScreen('WALK_HOME')} class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-left hover:bg-amber-100 transition">
+                      <i class="fa-solid fa-person-walking text-amber-600 mb-1 text-lg"></i>
+                      <p class="font-bold text-xs text-amber-900">Walk Home</p>
+                      <p class="text-[10px] text-amber-700">AU Summit Traffic Relief</p>
+                    </button>
+                    <button onClick={() => setCurrentScreen('CAUSE')} class="p-3 bg-red-50 border border-red-200 rounded-xl text-left hover:bg-red-100 transition">
+                      <i class="fa-solid fa-hand-holding-heart text-red-500 mb-1 text-lg"></i>
+                      <p class="font-bold text-xs text-red-900">Run for Cause</p>
+                      <p class="text-[10px] text-red-700">1 KM = 1 ETB Donation</p>
+                    </button>
+                    <button onClick={() => setCurrentScreen('CORPORATE')} class="p-3 bg-blue-50 border border-blue-200 rounded-xl text-left hover:bg-blue-100 transition">
+                      <i class="fa-solid fa-building text-blue-600 mb-1 text-lg"></i>
+                      <p class="font-bold text-xs text-blue-900">Corporate</p>
+                      <p class="text-[10px] text-blue-700">Bank vs Bank League</p>
+                    </button>
+                    <button onClick={() => setCurrentScreen('CYCLING')} class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-left hover:bg-emerald-100 transition">
+                      <i class="fa-solid fa-bicycle text-emerald-600 mb-1 text-lg"></i>
+                      <p class="font-bold text-xs text-emerald-900">Cycling Ads</p>
+                      <p class="text-[10px] text-emerald-700">Ride & Earn Revenue</p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* SCREEN 2: CHALLENGES CATALOG */}
+            {currentScreen === 'CHALLENGES' && (
+              <div class="p-4 space-y-3 pb-20 animate-fade-in">
+                <div class="flex justify-between items-center">
+                  <h1 class="text-lg font-bold text-slate-900">Explore Challenges</h1>
+                  <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-medium">Addis Ababa</span>
+                </div>
+
+                <div class="space-y-3">
+                  {/* Individual Challenge Card */}
+                  <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm hover:border-emerald-500 transition">
+                    <div class="flex justify-between items-start mb-2">
+                      <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">INDIVIDUAL</span>
+                      <span class="text-xs text-slate-500"><i class="fa-solid fa-clock"></i> 7 Days</span>
+                    </div>
+                    <h3 class="font-bold text-slate-900">50 KM Weekly Endurance</h3>
+                    <p class="text-xs text-slate-500 mb-3">Walk, run, or cycle anywhere in Ethiopia.</p>
+                    <button 
+                      onClick={() => {
+                        setSelectedChallenge({
+                          id: '50km-7days',
+                          title: '50 KM Weekly Endurance',
+                          category: 'Individual',
+                          target: 50,
+                          reward: '500 Adwa Pts + Finisher Badge',
+                          sponsor: 'Adwa Sports Federation'
+                        });
+                        setCurrentScreen('DETAILS');
+                      }}
+                      class="w-full bg-emerald-600 text-white font-bold py-2 rounded-xl text-xs hover:bg-emerald-700">
+                      View Details & Join
+                    </button>
+                  </div>
+
+                  {/* Futsal Challenge Card */}
+                  <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm hover:border-purple-500 transition">
+                    <div class="flex justify-between items-start mb-2">
+                      <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded">HOTEL CUP</span>
+                      <span class="text-xs text-purple-600 font-bold">16 Hotels</span>
+                    </div>
+                    <h3 class="font-bold text-slate-900">Adwa Hotels Futsal Tournament</h3>
+                    <p class="text-xs text-slate-500 mb-3">Youth academies & corporate hotel teams competing.</p>
+                    <button 
+                      onClick={() => setCurrentScreen('FUTSAL')}
+                      class="w-full bg-purple-600 text-white font-bold py-2 rounded-xl text-xs hover:bg-purple-700">
+                      View Tournament Bracket
+                    </button>
+                  </div>
+
+                  {/* Walk Home Program Card */}
+                  <div class="bg-amber-500 text-white p-4 rounded-2xl shadow-sm relative overflow-hidden">
+                    <span class="bg-black/30 text-white text-[10px] font-bold px-2 py-0.5 rounded">PUBLIC IMPACT</span>
+                    <h3 class="font-bold text-lg mt-1">Walk Home Challenge</h3>
+                    <p class="text-xs text-amber-100 mb-3">Bypass AU Summit traffic jam & earn bonus rewards.</p>
+                    <button 
+                      onClick={() => setCurrentScreen('WALK_HOME')}
+                      class="bg-white text-amber-900 font-bold px-4 py-2 rounded-xl text-xs shadow hover:bg-amber-50">
+                      Open Event Radar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* SCREEN 3: CHALLENGE DETAILS & JOIN */}
+            {currentScreen === 'DETAILS' && (
+              <div class="p-4 space-y-4 pb-20 animate-fade-in">
+                <button onClick={() => setCurrentScreen('CHALLENGES')} class="text-xs text-slate-500 font-bold flex items-center gap-1">
+                  <i class="fa-solid fa-arrow-left"></i> Back
+                </button>
+
+                <div class="bg-gradient-to-r from-emerald-600 to-teal-800 text-white p-5 rounded-2xl">
+                  <span class="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded">{selectedChallenge.category}</span>
+                  <h1 class="text-xl font-extrabold mt-2">{selectedChallenge.title}</h1>
+                  <p class="text-xs text-emerald-100 mt-1">Official Campaign • Verified by GPS</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-3">
+                  <div class="flex justify-between items-center text-xs pb-2 border-b border-slate-100">
+                    <span class="text-slate-500">Target Distance</span>
+                    <span class="font-bold text-slate-800">{selectedChallenge.target} KM</span>
+                  </div>
+                  <div class="flex justify-between items-center text-xs pb-2 border-b border-slate-100">
+                    <span class="text-slate-500">Reward Pool</span>
+                    <span class="font-bold text-emerald-600">{selectedChallenge.reward}</span>
+                  </div>
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-slate-500">Official Partner</span>
+                    <span class="font-bold text-slate-800">{selectedChallenge.sponsor}</span>
+                  </div>
+                </div>
+
+                <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 flex items-start gap-2">
+                  <i class="fa-solid fa-shield-halved text-amber-600 mt-0.5"></i>
+                  <p class="text-[11px] text-amber-800">
+                    <strong>Anti-Cheating Active:</strong> Phone sensors and speed monitoring are enabled to verify distance authenticity.
+                  </p>
+                </div>
+
+                <button 
+                  onClick={() => {
+                    setSessionKm(0.0);
+                    setElapsedSeconds(0);
+                    setIsTracking(true);
+                    setCurrentScreen('GPS');
+                  }}
+                  class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-sm shadow-md transition flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-location-crosshairs"></i> Start Workout Tracking
+                </button>
+              </div>
+            )}
+
+            {/* SCREEN 4: GPS LIVE TRACKING */}
+            {currentScreen === 'GPS' && (
+              <div class="p-4 h-full flex flex-col justify-between bg-slate-900 text-white pb-10 animate-fade-in">
+                <div>
+                  <div class="flex justify-between items-center pt-2 mb-4">
+                    <span class="text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2.5 py-1 rounded-full font-mono flex items-center gap-1">
+                      <span class="w-2 h-2 bg-emerald-400 rounded-full animate-ping"></span> GPS ACTIVE
+                    </span>
+                    <span class="text-xs text-slate-400">Addis Ababa • Bole Route</span>
+                  </div>
+
+                  {/* Simulated Map Container */}
+                  <div class="w-full h-48 bg-slate-800 rounded-2xl border border-slate-700 relative overflow-hidden flex items-center justify-center mb-6">
+                    {/* Simulated Map Grid Lines */}
+                    <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                    {/* Route Line Graphic */}
+                    <svg class="absolute inset-0 w-full h-full stroke-emerald-400 stroke-2 fill-none">
+                      <path d="M 40 140 Q 120 80, 200 110 T 320 40" stroke-dasharray="4 4"/>
+                    </svg>
+                    {/* GPS Pin */}
+                    <div class="absolute top-10 right-16 bg-emerald-500 text-slate-900 font-bold px-2 py-0.5 rounded-full text-[10px] shadow-lg flex items-center gap-1">
+                      <i class="fa-solid fa-person-walking"></i> You
+                    </div>
+                  </div>
+
+                  {/* Live Metrics Grid */}
+                  <div class="grid grid-cols-2 gap-4 text-center my-4">
+                    <div class="bg-slate-800/80 p-3 rounded-2xl border border-slate-700">
+                      <p class="text-xs text-slate-400">Distance</p>
+                      <p class="text-3xl font-extrabold text-emerald-400">{sessionKm.toFixed(2)} <span class="text-xs text-slate-300">KM</span></p>
+                    </div>
+                    <div class="bg-slate-800/80 p-3 rounded-2xl border border-slate-700">
+                      <p class="text-xs text-slate-400">Duration</p>
+                      <p class="text-3xl font-extrabold text-white font-mono">{formatTime(elapsedSeconds)}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Controls */}
+                <div class="space-y-2">
+                  <button 
+                    onClick={() => setIsTracking(!isTracking)}
+                    class={`w-full font-bold py-3 rounded-xl text-sm transition ${isTracking ? 'bg-amber-500 text-slate-900' : 'bg-emerald-500 text-slate-900'}`}>
+                    {isTracking ? <><i class="fa-solid fa-pause"></i> Pause Workout</> : <><i class="fa-solid fa-play"></i> Resume Workout</>}
+                  </button>
+
+                  <button 
+                    onClick={completeActivity}
+                    class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl text-sm transition">
+                    Finish & Save Session
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* SCREEN 5: ACTIVITY RESULT */}
+            {currentScreen === 'RESULT' && (
+              <div class="p-4 space-y-4 text-center pb-20 animate-fade-in">
+                <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl mt-4">
+                  <i class="fa-solid fa-trophy"></i>
+                </div>
+
+                <div>
+                  <h1 class="text-xl font-extrabold text-slate-900">Workout Completed!</h1>
+                  <p class="text-xs text-slate-500">Activity verified by Adwa Anti-Cheating Engine</p>
+                </div>
+
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl">
+                  <p class="text-xs text-emerald-700">Points Earned</p>
+                  <p class="text-3xl font-black text-emerald-800">+250 Adwa Points</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 text-left">
+                  <div class="bg-white p-3 rounded-xl border border-slate-200">
+                    <p class="text-[10px] text-slate-400">Distance Added</p>
+                    <p class="font-bold text-slate-800">{sessionKm.toFixed(2)} KM</p>
+                  </div>
+                  <div class="bg-white p-3 rounded-xl border border-slate-200">
+                    <p class="text-[10px] text-slate-400">Time Taken</p>
+                    <p class="font-bold text-slate-800">{formatTime(elapsedSeconds)}</p>
+                  </div>
+                </div>
+
+                <div class="space-y-2 pt-2">
+                  <button 
+                    onClick={() => setCurrentScreen('LEADERBOARD')}
+                    class="w-full bg-slate-900 text-white font-bold py-3 rounded-xl text-xs hover:bg-slate-800">
+                    View National Leaderboard
+                  </button>
+                  <button 
+                    onClick={() => setCurrentScreen('HOME')}
+                    class="w-full bg-slate-100 text-slate-700 font-bold py-2.5 rounded-xl text-xs hover:bg-slate-200">
+                    Return to Home
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* SCREEN 6: LEADERBOARD */}
+            {currentScreen === 'LEADERBOARD' && (
+              <div class="p-4 space-y-3 pb-20 animate-fade-in">
+                <h1 class="text-lg font-bold text-slate-900">Adwa Leaderboard</h1>
+
+                {/* Filter Tabs */}
+                <div class="flex gap-1 bg-slate-200 p-1 rounded-xl text-[11px] font-bold overflow-x-auto">
+                  <button class="bg-white text-slate-900 px-3 py-1 rounded-lg shadow-sm whitespace-nowrap">Ethiopia 🇪🇹</button>
+                  <button class="text-slate-600 px-3 py-1 rounded-lg whitespace-nowrap">Addis Ababa</button>
+                  <button class="text-slate-600 px-3 py-1 rounded-lg whitespace-nowrap">Pan-Africa 🌍</button>
+                </div>
+
+                {/* Rank Table */}
+                <div class="bg-white rounded-2xl border border-slate-200 divide-y divide-slate-100">
+                  <div class="p-3 flex items-center justify-between text-xs">
+                    <div class="flex items-center gap-2">
+                      <span class="w-5 text-center font-bold text-amber-500">1</span>
+                      <div class="w-7 h-7 bg-amber-100 rounded-full flex items-center justify-center font-bold text-amber-700 text-xs">BK</div>
+                      <span class="font-bold text-slate-800">Bekele A.</span>
+                    </div>
+                    <span class="font-mono font-bold text-slate-700">142.5 KM</span>
+                  </div>
+
+                  <div class="p-3 flex items-center justify-between text-xs">
+                    <div class="flex items-center gap-2">
+                      <span class="w-5 text-center font-bold text-slate-400">2</span>
+                      <div class="w-7 h-7 bg-slate-100 rounded-full flex items-center justify-center font-bold text-slate-700 text-xs">MH</div>
+                      <span class="font-bold text-slate-800">Mekelle Runners</span>
+                    </div>
+                    <span class="font-mono font-bold text-slate-700">128.0 KM</span>
+                  </div>
+
+                  {/* Active User Rank */}
+                  <div class="p-3 flex items-center justify-between text-xs bg-emerald-50 border-l-4 border-emerald-500">
+                    <div class="flex items-center gap-2">
+                      <span class="w-5 text-center font-bold text-emerald-700">4</span>
+                      <div class="w-7 h-7 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-xs">YK</div>
+                      <span class="font-bold text-emerald-900">You ({user.name})</span>
+                    </div>
+                    <span class="font-mono font-bold text-emerald-800">{user.todayKm + 32.4} KM</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* SCREEN 7: REWARDS STORE */}
+            {currentScreen === 'REWARDS' && (
+              <div class="p-4 space-y-3 pb-20 animate-fade-in">
+                <div class="flex justify-between items-center">
+                  <h1 class="text-lg font-bold text-slate-900">Adwa Rewards</h1>
+                  <span class="text-xs bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-full">
+                    <i class="fa-solid fa-coins text-amber-500"></i> {user.points} Points
+                  </span>
+                </div>
+
+                <div class="space-y-3">
+                  <div class="bg-white p-3.5 rounded-2xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                      <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">CULTURE</span>
+                      <h3 class="font-bold text-sm text-slate-800 mt-1">Addis Ababa Museum Ticket</h3>
+                      <p class="text-xs text-slate-500">1 Pass • Historical Heritage</p>
+                    </div>
+                    <button class="bg-emerald-600 text-white font-bold text-xs px-3 py-1.5 rounded-xl">2,500 Pts</button>
+                  </div>
+
+                  <div class="bg-white p-3.5 rounded-2xl border border-slate-200 flex justify-between items-center">
+                    <div>
+                      <span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-semibold">SPONSOR</span>
+                      <h3 class="font-bold text-sm text-slate-800 mt-1">Adidas Merchandise Voucher</h3>
+                      <p class="text-xs text-slate-500">20% Off Official Apparel</p>
+                    </div>
+                    <button class="bg-emerald-600 text-white font-bold text-xs px-3 py-1.5 rounded-xl">10,000 Pts</button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* SPECIAL MODULE 1: WALK HOME CHALLENGE */}
+            {currentScreen === 'WALK_HOME' && (
+              <div class="p-4 space-y-3 pb-20 animate-fade-in">
+                <button onClick={() => setCurrentScreen('HOME')} class="text-xs text-slate-500 font-bold"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
+                <div class="bg-amber-500 text-white p-4 rounded-2xl">
+                  <span class="bg-black/20 text-xs px-2 py-0.5 rounded font-bold">ADDIS ABABA SPECIAL</span>
+                  <h1 class="text-lg font-bold mt-1">Walk Home Challenge</h1>
+                  <p class="text-xs text-amber-100">Activated for AU Summit Traffic Management</p>
+                </div>
+                <div class="bg-white p-3 rounded-2xl border border-slate-200 text-xs space-y-2">
+                  <p class="font-bold text-slate-800">Safe Route Recommendation</p>
+                  <p class="text-slate-500">Avoid Bole Road congestion. Walk along designated pedestrian path via Kazanchis.</p>
+                  <div class="bg-amber-50 text-amber-800 p-2 rounded-lg font-semibold">
+                    🎁 Multiplier: 2x Adwa Points per KM walked
+                  </div>
+                </div>
+                <button 
+                  onClick={() => {
+                    setSelectedChallenge({ title: 'AU Summit Walk Home', category: 'Public Impact', target: 5, reward: '2x Points' });
+                    setCurrentScreen('DETAILS');
+                  }}
+                  class="w-full bg-amber-500 text-white font-bold py-2.5 rounded-xl text-xs">
+                  Join Walk Home Session
+                </button>
+              </div>
+            )}
+
+            {/* SPECIAL MODULE 2: RUN FOR A CAUSE */}
+            {currentScreen === 'CAUSE' && (
+              <div class="p-4 space-y-3 pb-20 animate-fade-in">
+                <button onClick={() => setCurrentScreen('HOME')} class="text-xs text-slate-500 font-bold"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
+                <div class="bg-red-600 text-white p-4 rounded-2xl">
+                  <h1 class="text-lg font-bold">Run for a Cause</h1>
+                  <p class="text-xs text-red-100">1 KM Walked = 1 ETB Donated by Sponsor</p>
+                </div>
+                <div class="bg-white p-3 rounded-2xl border border-slate-200 text-xs space-y-2">
+                  <div class="flex justify-between">
+                    <span class="text-slate-500">Total Campaign Target:</span>
+                    <span class="font-bold">100,000 ETB</span>
+                  </div>
+                  <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div class="bg-red-500 h-full w-[63%]"></div>
+                  </div>
+                  <p class="text-[11px] text-slate-500">Partnered with authorized local humanitarian foundations.</p>
+                </div>
+                <button 
+                  onClick={() => {
+                    setSelectedChallenge({ title: 'Adwa 50 KM for Cause', category: 'Humanitarian', target: 50, reward: 'Social Impact Cert.' });
+                    setCurrentScreen('DETAILS');
+                  }}
+                  class="w-full bg-red-600 text-white font-bold py-2.5 rounded-xl text-xs">
+                  Participate for Free
+                </button>
+              </div>
+            )}
+
+            {/* SPECIAL MODULE 3: CORPORATE */}
+            {currentScreen === 'CORPORATE' && (
+              <div class="p-4 space-y-3 pb-20 animate-fade-in">
+                <button onClick={() => setCurrentScreen('HOME')} class="text-xs text-slate-500 font-bold"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
+                <div class="bg-blue-700 text-white p-4 rounded-2xl">
+                  <h1 class="text-lg font-bold">Bank vs. Bank Wellness League</h1>
+                  <p class="text-xs text-blue-100">Corporate Employee Fitness Competition</p>
+                </div>
+                <div class="bg-white p-3 rounded-2xl border border-slate-200 text-xs space-y-2">
+                  <div class="flex justify-between font-bold text-slate-800">
+                    <span>1. Commercial Bank of Ethiopia</span>
+                    <span>45,200 KM</span>
+                  </div>
+                  <div class="flex justify-between font-bold text-blue-600">
+                    <span>2. Bank of Abyssinia (Your Org)</span>
+                    <span>41,800 KM</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* SPECIAL MODULE 4: CYCLING ADS */}
+            {currentScreen === 'CYCLING' && (
+              <div class="p-4 space-y-3 pb-20 animate-fade-in">
+                <button onClick={() => setCurrentScreen('HOME')} class="text-xs text-slate-500 font-bold"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
+                <div class="bg-emerald-700 text-white p-4 rounded-2xl">
+                  <h1 class="text-lg font-bold">Bicycle Advertising Network</h1>
+                  <p class="text-xs text-emerald-100">Rider ID: ADWA-BR-00125</p>
+                </div>
+                <div class="bg-white p-3 rounded-2xl border border-slate-200 text-xs space-y-1">
+                  <p class="font-bold text-slate-800">Active Campaign: Telecom Promo</p>
+                  <p class="text-slate-500">Carry banner while riding daily routes in Addis Ababa.</p>
+                </div>
+              </div>
+            )}
+
+            {/* SPECIAL MODULE 5: FUTSAL */}
+            {currentScreen === 'FUTSAL' && (
+              <div class="p-4 space-y-3 pb-20 animate-fade-in">
+                <button onClick={() => setCurrentScreen('HOME')} class="text-xs text-slate-500 font-bold"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
+                <div class="bg-purple-700 text-white p-4 rounded-2xl">
+                  <h1 class="text-lg font-bold">Adwa Hotels Futsal Cup</h1>
+                  <p class="text-xs text-purple-200">16 Hotels • Youth & Staff Tournament</p>
+                </div>
+                <div class="bg-white p-3 rounded-2xl border border-slate-200 text-xs space-y-2">
+                  <p class="font-bold text-slate-800">Semi-Final Match</p>
+                  <div class="flex justify-between items-center bg-slate-50 p-2 rounded-lg font-bold">
+                    <span>Sheraton Lions</span>
+                    <span class="text-purple-600">2 - 1</span>
+                    <span>Hilton Stars</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* SCREEN 8: PROFILE */}
+            {currentScreen === 'PROFILE' && (
+              <div class="p-4 space-y-3 pb-20 animate-fade-in">
+                <div class="text-center pt-2">
+                  <div class="w-16 h-16 bg-slate-800 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-2">
+                    YK
+                  </div>
+                  <h1 class="font-bold text-slate-900">{user.name}</h1>
+                  <p class="text-xs text-slate-500">Ethiopia 🇪🇹 • Member since 2026</p>
+                </div>
+
+                <div class="bg-white p-3 rounded-2xl border border-slate-200 text-xs space-y-2">
+                  <div class="flex justify-between">
+                    <span class="text-slate-500">Total Distance</span>
+                    <span class="font-bold text-slate-800">180.4 KM</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-500">Challenges Won</span>
+                    <span class="font-bold text-emerald-600">12 Badges</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Android Navigation Bar */}
+            <div class="absolute bottom-0 left-0 right-0 h-16 bg-white border-t border-slate-200 px-3 flex justify-around items-center z-40">
+              <button onClick={() => setCurrentScreen('HOME')} class={`flex flex-col items-center text-[10px] ${currentScreen === 'HOME' ? 'text-emerald-600 font-bold' : 'text-slate-400'}`}>
+                <i class="fa-solid fa-house text-base mb-0.5"></i> Home
+              </button>
+              <button onClick={() => setCurrentScreen('CHALLENGES')} class={`flex flex-col items-center text-[10px] ${currentScreen === 'CHALLENGES' ? 'text-emerald-600 font-bold' : 'text-slate-400'}`}>
+                <i class="fa-solid fa-trophy text-base mb-0.5"></i> Challenges
+              </button>
+              <button onClick={() => setCurrentScreen('LEADERBOARD')} class={`flex flex-col items-center text-[10px] ${currentScreen === 'LEADERBOARD' ? 'text-emerald-600 font-bold' : 'text-slate-400'}`}>
+                <i class="fa-solid fa-chart-simple text-base mb-0.5"></i> Leaderboard
+              </button>
+              <button onClick={() => setCurrentScreen('REWARDS')} class={`flex flex-col items-center text-[10px] ${currentScreen === 'REWARDS' ? 'text-emerald-600 font-bold' : 'text-slate-400'}`}>
+                <i class="fa-solid fa-gift text-base mb-0.5"></i> Rewards
+              </button>
+              <button onClick={() => setCurrentScreen('PROFILE')} class={`flex flex-col items-center text-[10px] ${currentScreen === 'PROFILE' ? 'text-emerald-600 font-bold' : 'text-slate-400'}`}>
+                <i class="fa-solid fa-user text-base mb-0.5"></i> Profile
+              </button>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<AdwaApp />);
+  </script>
+</body>
+</html>
