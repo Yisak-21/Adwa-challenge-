@@ -1,243 +1,1012 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adwa Challenge</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ADWA CHALLENGE - Digital Ecosystem</title>
+  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    body { background-color: #09090b; color: #ffffff; font-family: sans-serif; }
-  </style>
-</head>
-<body class="pb-24">
-
-  <!-- Header -->
-  <header class="p-4 flex justify-between items-center border-b border-zinc-800">
-    <div>
-      <h1 className="text-xl font-bold tracking-wider text-amber-400">ADWA CHALLENGE</h1>
-      <p class="text-xs text-zinc-400">Addis Ababa, Ethiopia</p>
-    </div>
-    <div class="w-9 h-9 rounded-full bg-emerald-900/60 border border-emerald-500/50 flex items-center justify-center text-emerald-400 font-bold text-xs">
-      AC
-    </div>
-  </header>
-
-  <!-- Navigation Tabs -->
-  <div class="flex border-b border-zinc-800 text-sm font-semibold text-center">
-    <button id="tab-home" onclick="switchTab('home')" class="flex-1 py-3 border-b-2 border-amber-400 text-amber-400">
-      Home Navigation
-    </button>
-    <button id="tab-challenges" onclick="switchTab('challenges')" class="flex-1 py-3 text-zinc-400">
-      Challenges
-    </button>
-  </div>
-
-  <main class="p-4 max-w-md mx-auto">
-
-    <!-- HOME TAB CONTENT -->
-    <section id="view-home" class="space-y-4">
-      <h2 class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
-        Core Services & Platform Modules
-      </h2>
-      
-      <div class="grid grid-cols-1 gap-3">
-        <!-- 1. Adwa Run -->
-        <div class="bg-gradient-to-r from-amber-500/10 to-zinc-900 border border-amber-500/30 p-3.5 rounded-xl flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="p-2.5 bg-zinc-950 rounded-lg text-amber-400"><i data-lucide="flame"></i></div>
-            <div>
-              <span class="text-[9px] uppercase font-bold text-amber-400 bg-amber-400/10 px-1.5 py-0.5 rounded">Active Module</span>
-              <h3 class="text-sm font-bold mt-0.5">Adwa Run</h3>
-              <p class="text-xs text-zinc-400">Run for a Cause & Earn Points</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2. Adwa Walk -->
-        <div class="bg-gradient-to-r from-emerald-500/10 to-zinc-900 border border-emerald-500/30 p-3.5 rounded-xl flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="p-2.5 bg-zinc-950 rounded-lg text-emerald-400"><i data-lucide="footprints"></i></div>
-            <div>
-              <span class="text-[9px] uppercase font-bold text-emerald-400 bg-emerald-400/10 px-1.5 py-0.5 rounded">Civic Mobility</span>
-              <h3 class="text-sm font-bold mt-0.5">Adwa Walk</h3>
-              <p class="text-xs text-zinc-400">Walk Home & Relief Congestion</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. Adwa Marketplace -->
-        <div class="bg-gradient-to-r from-yellow-500/10 to-zinc-900 border border-yellow-500/30 p-3.5 rounded-xl flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="p-2.5 bg-zinc-950 rounded-lg text-yellow-400"><i data-lucide="shopping-bag"></i></div>
-            <div>
-              <span class="text-[9px] uppercase font-bold text-yellow-400 bg-yellow-400/10 px-1.5 py-0.5 rounded">Rewards Hub</span>
-              <h3 class="text-sm font-bold mt-0.5">Adwa Marketplace</h3>
-              <p class="text-xs text-zinc-400">Redeem Tokens & Merch</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4. Adwa Cycling -->
-        <div class="bg-gradient-to-r from-teal-500/10 to-zinc-900 border border-teal-500/30 p-3.5 rounded-xl flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="p-2.5 bg-zinc-950 rounded-lg text-teal-400"><i data-lucide="bike"></i></div>
-            <div>
-              <span class="text-[9px] uppercase font-bold text-teal-400 bg-teal-400/10 px-1.5 py-0.5 rounded">Eco Ride</span>
-              <h3 class="text-sm font-bold mt-0.5">Adwa Cycling</h3>
-              <p class="text-xs text-zinc-400">Urban Eco-Rides & Logs</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. Adwa Bakery Delivery Subscription -->
-        <div class="bg-gradient-to-r from-orange-500/10 to-zinc-900 border border-orange-500/30 p-3.5 rounded-xl flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="p-2.5 bg-zinc-950 rounded-lg text-orange-400"><i data-lucide="shopping-basket"></i></div>
-            <div>
-              <span class="text-[9px] uppercase font-bold text-orange-400 bg-orange-400/10 px-1.5 py-0.5 rounded">Daily Sub</span>
-              <h3 class="text-sm font-bold mt-0.5">Adwa Bakery Delivery Subscription</h3>
-              <p class="text-xs text-zinc-400">Healthy Fuel & Subscriptions</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6. Adwa Futsal Tournament -->
-        <div class="bg-gradient-to-r from-emerald-600/10 to-zinc-900 border border-emerald-400/30 p-3.5 rounded-xl flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="p-2.5 bg-zinc-950 rounded-lg text-emerald-300"><i data-lucide="trophy"></i></div>
-            <div>
-              <span class="text-[9px] uppercase font-bold text-emerald-300 bg-emerald-400/10 px-1.5 py-0.5 rounded">Live League</span>
-              <h3 class="text-sm font-bold mt-0.5">Adwa Futsal Tournament</h3>
-              <p class="text-xs text-zinc-400">B2B & Corporate Brackets</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CHALLENGES TAB CONTENT -->
-    <section id="view-challenges" class="space-y-3 hidden">
-      <h2 class="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">
-        Active Events & Competitions
-      </h2>
-
-      <!-- List of 8 Challenges -->
-      <div class="bg-zinc-900 border border-emerald-500/30 p-3 rounded-xl flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="p-2 bg-zinc-950 text-emerald-400 rounded-lg"><i data-lucide="footprints"></i></div>
-          <div>
-            <h3 class="text-sm font-bold">Adwa Walk Home</h3>
-            <p class="text-xs text-zinc-400">Traffic Jam Relief</p>
-          </div>
-        </div>
-        <button class="bg-emerald-500 text-zinc-950 text-xs font-bold px-3 py-1 rounded">Join</button>
-      </div>
-
-      <div class="bg-zinc-900 border border-amber-500/30 p-3 rounded-xl flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="p-2 bg-zinc-950 text-amber-400 rounded-lg"><i data-lucide="zap"></i></div>
-          <div>
-            <h3 class="text-sm font-bold">Adwa 500m Run</h3>
-            <p class="text-xs text-zinc-400">Speed Sprint</p>
-          </div>
-        </div>
-        <button class="bg-emerald-500 text-zinc-950 text-xs font-bold px-3 py-1 rounded">Join</button>
-      </div>
-
-      <div class="bg-zinc-900 border border-orange-500/30 p-3 rounded-xl flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="p-2 bg-zinc-950 text-orange-400 rounded-lg"><i data-lucide="flame"></i></div>
-          <div>
-            <h3 class="text-sm font-bold">Adwa 1km Run</h3>
-            <p class="text-xs text-zinc-400">Standard Endurance</p>
-          </div>
-        </div>
-        <button class="bg-emerald-500 text-zinc-950 text-xs font-bold px-3 py-1 rounded">Join</button>
-      </div>
-
-      <div class="bg-zinc-900 border border-rose-500/30 p-3 rounded-xl flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="p-2 bg-zinc-950 text-rose-400 rounded-lg"><i data-lucide="heart"></i></div>
-          <div>
-            <h3 class="text-sm font-bold">Adwa Run for Cause</h3>
-            <p class="text-xs text-zinc-400">1 KM = 1 ETB Donated</p>
-          </div>
-        </div>
-        <button class="bg-emerald-500 text-zinc-950 text-xs font-bold px-3 py-1 rounded">Join</button>
-      </div>
-
-      <div class="bg-zinc-900 border border-teal-500/30 p-3 rounded-xl flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="p-2 bg-zinc-950 text-teal-400 rounded-lg"><i data-lucide="bike"></i></div>
-          <div>
-            <h3 class="text-sm font-bold">Adwa 1km Cycling</h3>
-            <p class="text-xs text-zinc-400">Sprint Ride</p>
-          </div>
-        </div>
-        <button class="bg-emerald-500 text-zinc-950 text-xs font-bold px-3 py-1 rounded">Join</button>
-      </div>
-
-      <div class="bg-zinc-900 border border-cyan-500/30 p-3 rounded-xl flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="p-2 bg-zinc-950 text-cyan-400 rounded-lg"><i data-lucide="bike"></i></div>
-          <div>
-            <h3 class="text-sm font-bold">Adwa 3km Cycling</h3>
-            <p class="text-xs text-zinc-400">Long Ride</p>
-          </div>
-        </div>
-        <button class="bg-emerald-500 text-zinc-950 text-xs font-bold px-3 py-1 rounded">Join</button>
-      </div>
-
-      <div class="bg-zinc-900 border border-yellow-500/30 p-3 rounded-xl flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="p-2 bg-zinc-950 text-yellow-400 rounded-lg"><i data-lucide="hotel"></i></div>
-          <div>
-            <h3 class="text-sm font-bold">Adwa Hotels Futsal Clubs</h3>
-            <p class="text-xs text-zinc-400">Hospitality League</p>
-          </div>
-        </div>
-        <button class="bg-emerald-500 text-zinc-950 text-xs font-bold px-3 py-1 rounded">Join</button>
-      </div>
-
-      <div class="bg-zinc-900 border border-indigo-500/30 p-3 rounded-xl flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="p-2 bg-zinc-950 text-indigo-400 rounded-lg"><i data-lucide="building-2"></i></div>
-          <div>
-            <h3 class="text-sm font-bold">Adwa Banks Futsal Championship</h3>
-            <p class="text-xs text-zinc-400">Corporate B2B League</p>
-          </div>
-        </div>
-        <button class="bg-emerald-500 text-zinc-950 text-xs font-bold px-3 py-1 rounded">Join</button>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Tab Switch Script -->
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <script>
-    lucide.createIcons();
-
-    function switchTab(tab) {
-      const homeView = document.getElementById('view-home');
-      const challengesView = document.getElementById('view-challenges');
-      const tabHome = document.getElementById('tab-home');
-      const tabChallenges = document.getElementById('tab-challenges');
-
-      if (tab === 'home') {
-        homeView.classList.remove('hidden');
-        challengesView.classList.add('hidden');
-        tabHome.className = 'flex-1 py-3 border-b-2 border-amber-400 text-amber-400';
-        tabChallenges.className = 'flex-1 py-3 text-zinc-400';
-      } else {
-        challengesView.classList.remove('hidden');
-        homeView.classList.add('hidden');
-        tabChallenges.className = 'flex-1 py-3 border-b-2 border-amber-400 text-amber-400';
-        tabHome.className = 'flex-1 py-3 text-zinc-400';
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            adwa: {
+              gold: '#D4AF37',
+              green: '#008751',
+              slate: '#09090B',
+              card: '#121215',
+              border: '#27272A'
+            }
+          }
+        }
       }
     }
   </script>
+  <style>
+    body {
+      background-color: #09090B;
+      color: #FFFFFF;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .pb-safe { padding-bottom: calc(4.5rem + env(safe-area-inset-bottom)); }
+    .pulse-ring {
+      box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+    }
+  </style>
+</head>
+<body class="flex justify-center items-start min-h-screen bg-black">
+
+  <!-- Mobile Container Shell -->
+  <div className="w-full max-w-md bg-adwa-slate min-h-screen relative flex flex-col border-x border-adwa-border shadow-2xl overflow-x-hidden pb-safe">
+    
+    <!-- TOP HEADER -->
+    <header className="sticky top-0 z-40 bg-adwa-slate/90 backdrop-blur-md px-4 py-3 border-b border-adwa-border flex justify-between items-center">
+      <div className="flex items-center gap-2" onclick="navigateTo('home')">
+        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-adwa-gold to-emerald-600 flex items-center justify-center font-black text-black text-sm">
+          AC
+        </div>
+        <div>
+          <h1 className="text-sm font-extrabold tracking-wider text-adwa-gold leading-none">ADWA CHALLENGE</h1>
+          <p className="text-[10px] font-medium text-emerald-400 tracking-widest mt-0.5 uppercase">WALK • RUN • COMPETE • WIN</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-3">
+        <button onclick="navigateTo('marketplace')" className="relative p-1.5 text-zinc-400 hover:text-amber-400">
+          <i className="fa-solid fa-cart-shopping text-sm"></i>
+          <span id="cart-badge" className="absolute -top-1 -right-1 bg-emerald-500 text-black font-extrabold text-[9px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+        </button>
+        <div onclick="navigateTo('profile')" className="w-8 h-8 rounded-full bg-zinc-800 border border-adwa-gold/50 flex items-center justify-center text-xs font-bold text-adwa-gold cursor-pointer">
+          YA
+        </div>
+      </div>
+    </header>
+
+    <!-- DYNAMIC SCREEN CONTENT AREA -->
+    <main id="app-viewport" className="flex-1 p-4">
+      <!-- Views rendered dynamically via JavaScript -->
+    </main>
+
+    <!-- BOTTOM NAVIGATION BAR -->
+    <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 bg-adwa-card/95 backdrop-blur-lg border-t border-adwa-border px-2 py-2 flex justify-around items-center">
+      <button id="nav-home" onclick="navigateTo('home')" className="flex flex-col items-center gap-1 text-adwa-gold">
+        <i className="fa-solid fa-house text-base"></i>
+        <span className="text-[10px] font-semibold">Home</span>
+      </button>
+      <button id="nav-challenges" onclick="navigateTo('challenges')" className="flex flex-col items-center gap-1 text-zinc-500">
+        <i className="fa-solid fa-trophy text-base"></i>
+        <span className="text-[10px] font-semibold">Challenges</span>
+      </button>
+      <button id="nav-activity" onclick="navigateTo('activity')" className="flex flex-col items-center gap-1 text-zinc-500">
+        <i className="fa-solid fa-[#008751] fa-person-running text-base"></i>
+        <span className="text-[10px] font-semibold">Activity</span>
+      </button>
+      <button id="nav-leaderboard" onclick="navigateTo('leaderboard')" className="flex flex-col items-center gap-1 text-zinc-500">
+        <i className="fa-solid fa-ranking-star text-base"></i>
+        <span className="text-[10px] font-semibold">Rankings</span>
+      </button>
+      <button id="nav-profile" onclick="navigateTo('profile')" className="flex flex-col items-center gap-1 text-zinc-500">
+        <i className="fa-solid fa-user text-base"></i>
+        <span className="text-[10px] font-semibold">Profile</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- JAVASCRIPT APP LOGIC & STATE ENGINE -->
+  <script>
+    // GLOBAL APPLICATION STATE
+    const state = {
+      user: {
+        name: "Yisak",
+        points: 1250,
+        todayDistance: 2.8,
+        todayTarget: 5.0,
+        totalDistance: 142.5,
+        activitiesCount: 38,
+        badges: ["5K Walker", "Adwa Pioneer", "Civic Champion"]
+      },
+      cart: [],
+      activeTracking: null,
+      trackingTimer: null,
+      trackingData: { distance: 0.0, time: 0, calories: 0, speed: 0.0, type: 'Run' },
+      activeChallenge: null
+    };
+
+    // VIEW ROUTER ENGINE
+    function navigateTo(screenId, params = {}) {
+      const viewport = document.getElementById('app-viewport');
+      window.scrollTo(0, 0);
+
+      // Update Bottom Navigation Highlight
+      const navItems = ['home', 'challenges', 'activity', 'leaderboard', 'profile'];
+      navItems.forEach(item => {
+        const btn = document.getElementById(`nav-${item}`);
+        if (btn) {
+          if (item === screenId) {
+            btn.className = "flex flex-col items-center gap-1 text-adwa-gold font-bold";
+          } else {
+            btn.className = "flex flex-col items-center gap-1 text-zinc-500 hover:text-zinc-300";
+          }
+        }
+      });
+
+      // Render Screen
+      switch(screenId) {
+        case 'home':
+          viewport.innerHTML = renderHomeScreen();
+          break;
+        case 'challenges':
+          viewport.innerHTML = renderChallengesScreen();
+          break;
+        case 'activity':
+          viewport.innerHTML = renderActivityScreen();
+          break;
+        case 'leaderboard':
+          viewport.innerHTML = renderLeaderboardScreen();
+          break;
+        case 'profile':
+          viewport.innerHTML = renderProfileScreen();
+          break;
+        
+        // Ecosystem Deep Services
+        case 'service-run':
+          viewport.innerHTML = renderRunDashboard();
+          break;
+        case 'service-walk':
+          viewport.innerHTML = renderWalkDashboard();
+          break;
+        case 'marketplace':
+          viewport.innerHTML = renderMarketplaceScreen();
+          break;
+        case 'service-cycling':
+          viewport.innerHTML = renderCyclingDashboard();
+          break;
+        case 'service-cycling-ads':
+          viewport.innerHTML = renderCyclingAdsScreen();
+          break;
+        case 'service-bakery':
+          viewport.innerHTML = renderBakeryScreen();
+          break;
+        case 'service-futsal':
+          viewport.innerHTML = renderFutsalScreen(params.tab || 'hotels');
+          break;
+        
+        // Interactive Flow Screens
+        case 'challenge-detail':
+          viewport.innerHTML = renderChallengeDetailScreen(params.id);
+          break;
+        case 'gps-tracking':
+          viewport.innerHTML = renderGPSScreen(params.type || 'Activity');
+          initGPSSimulation(params.type || 'Activity');
+          break;
+        case 'activity-result':
+          viewport.innerHTML = renderActivityResultScreen();
+          break;
+        case 'rewards':
+          viewport.innerHTML = renderRewardsScreen();
+          break;
+        default:
+          viewport.innerHTML = renderHomeScreen();
+      }
+    }
+
+    // --- SCREEN RENDERERS ---
+
+    // 1. HOME SCREEN
+    function renderHomeScreen() {
+      return `
+        <div className="space-y-5 animate-fadeIn">
+          <!-- Hero Section -->
+          <div className="bg-gradient-to-br from-zinc-900 via-adwa-card to-emerald-950/40 p-4 rounded-2xl border border-adwa-gold/30 shadow-lg">
+            <div className="flex justify-between items-start">
+              <div>
+                <p className="text-xs text-zinc-400 font-medium">Good morning,</p>
+                <h2 className="text-xl font-black text-white">${state.user.name} 👋</h2>
+              </div>
+              <div onclick="navigateTo('rewards')" className="bg-adwa-gold/10 border border-adwa-gold/40 px-3 py-1 rounded-full flex items-center gap-1.5 cursor-pointer">
+                <i className="fa-solid fa-coins text-adwa-gold text-xs"></i>
+                <span className="text-xs font-bold text-adwa-gold">${state.user.points} PTS</span>
+              </div>
+            </div>
+
+            <!-- Daily Activity Meter -->
+            <div className="mt-4 pt-3 border-t border-zinc-800">
+              <div className="flex justify-between text-xs font-bold mb-1">
+                <span className="text-zinc-300">Today's Distance</span>
+                <span className="text-emerald-400">${state.user.todayDistance} / ${state.user.todayTarget} KM</span>
+              </div>
+              <div className="w-full h-2.5 bg-zinc-800 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-emerald-500 to-adwa-gold rounded-full" style="width: ${(state.user.todayDistance / state.user.todayTarget)*100}%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Quick Challenges Carousel -->
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-xs font-extrabold uppercase tracking-wider text-zinc-400">Active Challenges</h3>
+              <button onclick="navigateTo('challenges')" className="text-xs font-bold text-adwa-gold">See All</button>
+            </div>
+            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none">
+              <div onclick="navigateTo('challenge-detail', {id: 'walk-home'})" className="min-w-[150px] bg-adwa-card border border-emerald-500/40 p-3 rounded-xl cursor-pointer">
+                <span className="text-[9px] font-bold text-emerald-400 uppercase bg-emerald-400/10 px-2 py-0.5 rounded">Mobility</span>
+                <h4 className="text-xs font-extrabold text-white mt-1.5">Walk Home</h4>
+                <p className="text-[10px] text-zinc-400">Safe Route Active</p>
+              </div>
+              <div onclick="navigateTo('challenge-detail', {id: '1km-run'})" className="min-w-[150px] bg-adwa-card border border-amber-500/40 p-3 rounded-xl cursor-pointer">
+                <span className="text-[9px] font-bold text-amber-400 uppercase bg-amber-400/10 px-2 py-0.5 rounded">Sprint</span>
+                <h4 className="text-xs font-extrabold text-white mt-1.5">1KM Run</h4>
+                <p className="text-[10px] text-zinc-400">Entry Sprint</p>
+              </div>
+              <div onclick="navigateTo('challenge-detail', {id: 'family'})" className="min-w-[150px] bg-adwa-card border border-purple-500/40 p-3 rounded-xl cursor-pointer">
+                <span className="text-[9px] font-bold text-purple-400 uppercase bg-purple-400/10 px-2 py-0.5 rounded">Community</span>
+                <h4 className="text-xs font-extrabold text-white mt-1.5">Family Shield</h4>
+                <p className="text-[10px] text-zinc-400">Team Challenge</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Explore Ecosystem Grid -->
+          <div>
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-zinc-400 mb-3">Explore Ecosystem</h3>
+            <div className="grid grid-cols-2 gap-3">
+              <div onclick="navigateTo('service-run')" className="bg-gradient-to-br from-amber-500/10 to-adwa-card border border-amber-500/30 p-3.5 rounded-xl cursor-pointer hover:border-amber-400">
+                <i className="fa-solid fa-person-running text-amber-400 text-xl mb-2"></i>
+                <h4 className="text-sm font-bold text-white">Adwa Run</h4>
+                <p className="text-[10px] text-zinc-400 mt-0.5">Activities & Communities</p>
+              </div>
+              <div onclick="navigateTo('service-walk')" className="bg-gradient-to-br from-emerald-500/10 to-adwa-card border border-emerald-500/30 p-3.5 rounded-xl cursor-pointer hover:border-emerald-400">
+                <i className="fa-solid fa-shoe-prints text-emerald-400 text-xl mb-2"></i>
+                <h4 className="text-sm font-bold text-white">Adwa Walk</h4>
+                <p className="text-[10px] text-zinc-400 mt-0.5">Civic Step Tracking</p>
+              </div>
+              <div onclick="navigateTo('marketplace')" className="bg-gradient-to-br from-yellow-500/10 to-adwa-card border border-yellow-500/30 p-3.5 rounded-xl cursor-pointer hover:border-yellow-400">
+                <i className="fa-solid fa-store text-yellow-400 text-xl mb-2"></i>
+                <h4 className="text-sm font-bold text-white">Marketplace</h4>
+                <p className="text-[10px] text-zinc-400 mt-0.5">Products & Rewards</p>
+              </div>
+              <div onclick="navigateTo('service-cycling')" className="bg-gradient-to-br from-teal-500/10 to-adwa-card border border-teal-500/30 p-3.5 rounded-xl cursor-pointer hover:border-teal-400">
+                <i className="fa-solid fa-bicycle text-teal-400 text-xl mb-2"></i>
+                <h4 className="text-sm font-bold text-white">Adwa Cycling</h4>
+                <p className="text-[10px] text-zinc-400 mt-0.5">Rider Community</p>
+              </div>
+              <div onclick="navigateTo('service-cycling-ads')" className="bg-gradient-to-br from-blue-500/10 to-adwa-card border border-blue-500/30 p-3.5 rounded-xl cursor-pointer hover:border-blue-400">
+                <i className="fa-solid fa-rectangle-ad text-blue-400 text-xl mb-2"></i>
+                <h4 className="text-sm font-bold text-white">Cycling Ads</h4>
+                <p className="text-[10px] text-zinc-400 mt-0.5">Rider Ad Network</p>
+              </div>
+              <div onclick="navigateTo('service-bakery')" className="bg-gradient-to-br from-orange-500/10 to-adwa-card border border-orange-500/30 p-3.5 rounded-xl cursor-pointer hover:border-orange-400">
+                <i className="fa-solid fa-bread-slice text-orange-400 text-xl mb-2"></i>
+                <h4 className="text-sm font-bold text-white">Bakery Sub</h4>
+                <p className="text-[10px] text-zinc-400 mt-0.5">Daily Bread Delivery</p>
+              </div>
+            </div>
+
+            <!-- Full Width Futsal Card -->
+            <div onclick="navigateTo('service-futsal')" className="mt-3 bg-gradient-to-r from-emerald-900/40 via-adwa-card to-adwa-gold/20 border border-emerald-500/40 p-4 rounded-xl cursor-pointer flex justify-between items-center">
+              <div>
+                <span className="text-[9px] font-bold text-adwa-gold bg-adwa-gold/10 px-2 py-0.5 rounded uppercase">B2B & Hospitality</span>
+                <h4 className="text-base font-black text-white mt-1">Adwa Futsal Tournaments</h4>
+                <p className="text-xs text-zinc-400">Hotels & Bank League Brackets</p>
+              </div>
+              <i className="fa-solid fa-trophy text-2xl text-adwa-gold"></i>
+            </div>
+          </div>
+
+          <!-- Top Today Preview -->
+          <div className="bg-adwa-card border border-adwa-border p-3 rounded-xl">
+            <div className="flex justify-between items-center mb-2">
+              <h4 className="text-xs font-bold text-zinc-300">Today's Leaderboard Leader</h4>
+              <button onclick="navigateTo('leaderboard')" className="text-[10px] font-bold text-emerald-400">View Full</button>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs">1</div>
+                <div>
+                  <p className="text-xs font-bold text-white">Abebe B.</p>
+                  <p className="text-[10px] text-zinc-400">14.2 KM • Walk Home</p>
+                </div>
+              </div>
+              <span className="text-xs font-extrabold text-adwa-gold">1,850 PTS</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // 2. CHALLENGES SCREEN
+    function renderChallengesScreen() {
+      return `
+        <div className="space-y-4">
+          <div className="border-b border-zinc-800 pb-2">
+            <h2 className="text-lg font-black text-white">CHALLENGES HUB</h2>
+            <p className="text-xs text-zinc-400">Select a category and join verified movement challenges.</p>
+          </div>
+
+          <!-- Category Sections -->
+          <div className="space-y-4">
+            
+            <!-- RUNNING CATEGORY -->
+            <div>
+              <h3 className="text-xs font-extrabold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <i className="fa-solid fa-person-running"></i> Running Challenges
+              </h3>
+              <div className="space-y-2">
+                <div onclick="navigateTo('challenge-detail', {id: '500m-run'})" className="bg-adwa-card border border-zinc-800 p-3 rounded-xl flex justify-between items-center cursor-pointer">
+                  <div>
+                    <h4 className="text-sm font-bold text-white">Adwa 500m Run</h4>
+                    <p className="text-xs text-zinc-400">Beginner-friendly sprint</p>
+                  </div>
+                  <button className="bg-amber-500 text-black font-bold text-xs px-3 py-1 rounded-lg">Join</button>
+                </div>
+                <div onclick="navigateTo('challenge-detail', {id: '1km-run'})" className="bg-adwa-card border border-zinc-800 p-3 rounded-xl flex justify-between items-center cursor-pointer">
+                  <div>
+                    <h4 className="text-sm font-bold text-white">Adwa 1KM Run</h4>
+                    <p className="text-xs text-zinc-400">Entry distance challenge</p>
+                  </div>
+                  <button className="bg-amber-500 text-black font-bold text-xs px-3 py-1 rounded-lg">Join</button>
+                </div>
+                <div onclick="navigateTo('challenge-detail', {id: 'cause-run'})" className="bg-adwa-card border border-rose-500/40 p-3 rounded-xl flex justify-between items-center cursor-pointer">
+                  <div>
+                    <span className="text-[9px] font-bold text-rose-400 uppercase bg-rose-400/10 px-1.5 py-0.5 rounded">Social Impact</span>
+                    <h4 className="text-sm font-bold text-white mt-0.5">Adwa Run for Cause</h4>
+                    <p className="text-xs text-zinc-400">1 KM = 10 ETB Sponsor Donation</p>
+                  </div>
+                  <button className="bg-rose-500 text-white font-bold text-xs px-3 py-1 rounded-lg">Join</button>
+                </div>
+                <div onclick="navigateTo('challenge-detail', {id: 'ethio-telecom'})" className="bg-adwa-card border border-blue-500/40 p-3 rounded-xl flex justify-between items-center cursor-pointer">
+                  <div>
+                    <span className="text-[9px] font-bold text-blue-400 uppercase bg-blue-400/10 px-1.5 py-0.5 rounded">Corporate Sponsor</span>
+                    <h4 className="text-sm font-bold text-white mt-0.5">Ethio telecom Challenge</h4>
+                    <p className="text-xs text-zinc-400">Win Unlimited Airtime & Merch</p>
+                  </div>
+                  <button className="bg-blue-600 text-white font-bold text-xs px-3 py-1 rounded-lg">Join</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- WALKING CATEGORY -->
+            <div>
+              <h3 className="text-xs font-extrabold text-emerald-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <i className="fa-solid fa-shoe-prints"></i> Walking Mobility
+              </h3>
+              <div onclick="navigateTo('challenge-detail', {id: 'walk-home'})" className="bg-adwa-card border border-emerald-500/40 p-3 rounded-xl flex justify-between items-center cursor-pointer">
+                <div>
+                  <span className="text-[9px] font-bold text-emerald-400 uppercase bg-emerald-400/10 px-1.5 py-0.5 rounded">Traffic Relief</span>
+                  <h4 className="text-sm font-bold text-white mt-0.5">Adwa Walk Home</h4>
+                  <p className="text-xs text-zinc-400">Safe peak-hour urban routes</p>
+                </div>
+                <button className="bg-emerald-500 text-black font-bold text-xs px-3 py-1 rounded-lg">Join</button>
+              </div>
+            </div>
+
+            <!-- FAMILY CATEGORY -->
+            <div>
+              <h3 className="text-xs font-extrabold text-purple-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <i className="fa-solid fa-users"></i> Family & Teams
+              </h3>
+              <div onclick="navigateTo('challenge-detail', {id: 'family'})" className="bg-adwa-card border border-purple-500/40 p-3 rounded-xl flex justify-between items-center cursor-pointer">
+                <div>
+                  <h4 className="text-sm font-bold text-white">Family Members Challenge</h4>
+                  <p className="text-xs text-zinc-400">Combined family distance ranking</p>
+                </div>
+                <button className="bg-purple-600 text-white font-bold text-xs px-3 py-1 rounded-lg">Join</button>
+              </div>
+            </div>
+
+            <!-- CYCLING CATEGORY -->
+            <div>
+              <h3 className="text-xs font-extrabold text-teal-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <i className="fa-solid fa-bicycle"></i> Cycling
+              </h3>
+              <div className="grid grid-cols-2 gap-2">
+                <div onclick="navigateTo('challenge-detail', {id: '1km-cycling'})" className="bg-adwa-card border border-zinc-800 p-3 rounded-xl cursor-pointer">
+                  <h4 className="text-xs font-bold text-white">Adwa 1KM Cycling</h4>
+                  <p className="text-[10px] text-zinc-400">Sprint ride</p>
+                </div>
+                <div onclick="navigateTo('challenge-detail', {id: '3km-cycling'})" className="bg-adwa-card border border-zinc-800 p-3 rounded-xl cursor-pointer">
+                  <h4 className="text-xs font-bold text-white">Adwa 3KM Cycling</h4>
+                  <p className="text-[10px] text-zinc-400">Distance ride</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FUTSAL CATEGORY -->
+            <div>
+              <h3 className="text-xs font-extrabold text-adwa-gold uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <i className="fa-solid fa-trophy"></i> Futsal Tournaments
+              </h3>
+              <div className="space-y-2">
+                <div onclick="navigateTo('service-futsal', {tab: 'hotels'})" className="bg-adwa-card border border-adwa-gold/30 p-3 rounded-xl flex justify-between items-center cursor-pointer">
+                  <div>
+                    <h4 className="text-xs font-bold text-white">Hotels Futsal Clubs</h4>
+                    <p className="text-[10px] text-zinc-400">Hospitality sector tournament</p>
+                  </div>
+                  <i className="fa-solid fa-chevron-right text-xs text-adwa-gold"></i>
+                </div>
+                <div onclick="navigateTo('service-futsal', {tab: 'banks'})" className="bg-adwa-card border border-adwa-gold/30 p-3 rounded-xl flex justify-between items-center cursor-pointer">
+                  <div>
+                    <h4 className="text-xs font-bold text-white">Banks Futsal Championship</h4>
+                    <p className="text-[10px] text-zinc-400">Corporate banking league</p>
+                  </div>
+                  <i className="fa-solid fa-chevron-right text-xs text-adwa-gold"></i>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      `;
+    }
+
+    // 3. ACTIVITY DASHBOARD SCREEN
+    function renderActivityScreen() {
+      return `
+        <div className="space-y-5">
+          <div className="border-b border-zinc-800 pb-2 flex justify-between items-center">
+            <div>
+              <h2 className="text-lg font-black text-white">ACTIVITY DASHBOARD</h2>
+              <p className="text-xs text-zinc-400">Real-time metrics & session tracking</p>
+            </div>
+            <button onclick="navigateTo('gps-tracking', {type: 'Run'})" className="bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs px-3 py-2 rounded-xl flex items-center gap-1.5 pulse-ring">
+              <i className="fa-solid fa-play"></i> Start Track
+            </button>
+          </div>
+
+          <!-- Summary Metric Cards -->
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-adwa-card border border-zinc-800 p-3 rounded-xl">
+              <p className="text-[10px] text-zinc-400 font-bold uppercase">Total Steps Today</p>
+              <h3 className="text-xl font-black text-emerald-400 mt-1">4,120</h3>
+              <p className="text-[10px] text-zinc-500 mt-0.5">Target: 10,000 steps</p>
+            </div>
+            <div className="bg-adwa-card border border-zinc-800 p-3 rounded-xl">
+              <p className="text-[10px] text-zinc-400 font-bold uppercase">Calories Burned</p>
+              <h3 className="text-xl font-black text-amber-400 mt-1">310 KCAL</h3>
+              <p className="text-[10px] text-zinc-500 mt-0.5">Active time: 34 mins</p>
+            </div>
+          </div>
+
+          <!-- Activity Breakdown Tabs -->
+          <div className="space-y-3">
+            <h3 className="text-xs font-extrabold text-zinc-400 uppercase tracking-wider">Breakdown by Discipline</h3>
+            <div className="bg-adwa-card border border-zinc-800 p-3 rounded-xl flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-amber-500/10 text-amber-400 rounded-lg"><i className="fa-solid fa-person-running text-base"></i></div>
+                <div>
+                  <h4 className="text-xs font-bold text-white">Running Logs</h4>
+                  <p className="text-[10px] text-zinc-400">1.8 KM completed today</p>
+                </div>
+              </div>
+              <button onclick="navigateTo('gps-tracking', {type: 'Run'})" className="text-xs font-bold text-amber-400">Start</button>
+            </div>
+            <div className="bg-adwa-card border border-zinc-800 p-3 rounded-xl flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg"><i className="fa-solid fa-shoe-prints text-base"></i></div>
+                <div>
+                  <h4 className="text-xs font-bold text-white">Walking Logs</h4>
+                  <p className="text-[10px] text-zinc-400">1.0 KM Walk Home</p>
+                </div>
+              </div>
+              <button onclick="navigateTo('gps-tracking', {type: 'Walk'})" className="text-xs font-bold text-emerald-400">Start</button>
+            </div>
+            <div className="bg-adwa-card border border-zinc-800 p-3 rounded-xl flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-teal-500/10 text-teal-400 rounded-lg"><i className="fa-solid fa-bicycle text-base"></i></div>
+                <div>
+                  <h4 className="text-xs font-bold text-white">Cycling Logs</h4>
+                  <p className="text-[10px] text-zinc-400">No session today</p>
+                </div>
+              </div>
+              <button onclick="navigateTo('gps-tracking', {type: 'Cycling'})" className="text-xs font-bold text-teal-400">Start</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // 4. LEADERBOARD SCREEN
+    function renderLeaderboardScreen() {
+      return `
+        <div className="space-y-4">
+          <div className="border-b border-zinc-800 pb-2">
+            <h2 className="text-lg font-black text-white">ECOSYSTEM RANKINGS</h2>
+            <p className="text-xs text-zinc-400">Verified participant rankings & standings</p>
+          </div>
+
+          <!-- Leaderboard Tabs -->
+          <div className="flex bg-zinc-900 p-1 rounded-xl border border-zinc-800 text-xs font-semibold">
+            <button className="flex-1 py-1.5 bg-adwa-gold text-black font-extrabold rounded-lg">Global</button>
+            <button className="flex-1 py-1.5 text-zinc-400">Ethiopia</button>
+            <button className="flex-1 py-1.5 text-zinc-400">City</button>
+            <button className="flex-1 py-1.5 text-zinc-400">Teams</button>
+          </div>
+
+          <!-- Rankings List -->
+          <div className="space-y-2">
+            <div className="bg-adwa-card border border-adwa-gold/50 p-3 rounded-xl flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-adwa-gold text-black font-black flex items-center justify-center text-xs">1</div>
+                <div>
+                  <h4 className="text-xs font-bold text-white">Abebe B.</h4>
+                  <p className="text-[10px] text-zinc-400">Addis Ababa • 42.1 KM</p>
+                </div>
+              </div>
+              <span className="text-xs font-black text-adwa-gold">3,450 PTS</span>
+            </div>
+
+            <div className="bg-adwa-card border border-zinc-700/50 p-3 rounded-xl flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-zinc-300 text-black font-black flex items-center justify-center text-xs">2</div>
+                <div>
+                  <h4 className="text-xs font-bold text-white">Tigist G.</h4>
+                  <p className="text-[10px] text-zinc-400">Hawassa • 38.4 KM</p>
+                </div>
+              </div>
+              <span className="text-xs font-black text-zinc-300">2,980 PTS</span>
+            </div>
+
+            <div className="bg-adwa-card border border-amber-800/50 p-3 rounded-xl flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-amber-700 text-white font-black flex items-center justify-center text-xs">3</div>
+                <div>
+                  <h4 className="text-xs font-bold text-white">Dawit M.</h4>
+                  <p className="text-[10px] text-zinc-400">Addis Ababa • 31.0 KM</p>
+                </div>
+              </div>
+              <span className="text-xs font-black text-amber-500">2,410 PTS</span>
+            </div>
+
+            <!-- Current User Position -->
+            <div className="bg-emerald-950/40 border border-emerald-500/50 p-3 rounded-xl flex justify-between items-center mt-4">
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-emerald-500 text-black font-black flex items-center justify-center text-xs">14</div>
+                <div>
+                  <h4 className="text-xs font-bold text-emerald-400">${state.user.name} (You)</h4>
+                  <p className="text-[10px] text-zinc-400">Addis Ababa • ${state.user.totalDistance} KM</p>
+                </div>
+              </div>
+              <span className="text-xs font-black text-emerald-400">${state.user.points} PTS</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // 5. PROFILE SCREEN
+    function renderProfileScreen() {
+      return `
+        <div className="space-y-5">
+          <!-- Profile Card Header -->
+          <div className="bg-adwa-card border border-adwa-border p-4 rounded-2xl text-center space-y-2">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-emerald-500 to-adwa-gold p-0.5 mx-auto">
+              <div className="w-full h-full bg-zinc-950 rounded-full flex items-center justify-center font-black text-xl text-adwa-gold">
+                YA
+              </div>
+            </div>
+            <div>
+              <h2 className="text-lg font-black text-white">${state.user.name}</h2>
+              <p className="text-xs text-zinc-400">Adwa Pioneer • Level 4 Member</p>
+            </div>
+            <div className="flex justify-around pt-3 border-t border-zinc-800 text-center">
+              <div>
+                <p className="text-xs font-extrabold text-white">${state.user.totalDistance} KM</p>
+                <p className="text-[10px] text-zinc-400">Total Distance</p>
+              </div>
+              <div>
+                <p className="text-xs font-extrabold text-emerald-400">${state.user.activitiesCount}</p>
+                <p className="text-[10px] text-zinc-400">Activities</p>
+              </div>
+              <div>
+                <p className="text-xs font-extrabold text-adwa-gold">${state.user.points}</p>
+                <p className="text-[10px] text-zinc-400">Tokens</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Badges & Achievements -->
+          <div>
+            <h3 className="text-xs font-extrabold text-zinc-400 uppercase tracking-wider mb-2">Unlocked Badges</h3>
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              ${state.user.badges.map(b => `
+                <div className="bg-zinc-900 border border-adwa-gold/30 px-3 py-2 rounded-xl flex items-center gap-2 whitespace-nowrap">
+                  <i className="fa-solid fa-award text-adwa-gold text-sm"></i>
+                  <span className="text-xs font-bold text-zinc-200">${b}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div className="space-y-2">
+            <button onclick="navigateTo('rewards')" className="w-full bg-adwa-card border border-zinc-800 p-3 rounded-xl flex justify-between items-center text-xs font-bold text-white hover:bg-zinc-900">
+              <span className="flex items-center gap-2"><i className="fa-solid fa-gift text-amber-400"></i> Redeem Rewards & Perks</span>
+              <i className="fa-solid fa-chevron-right text-zinc-500"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // 6. GPS TRACKING SIMULATION SCREEN
+    function renderGPSScreen(type) {
+      return `
+        <div className="space-y-4">
+          <!-- Map Visual Area -->
+          <div className="w-full h-64 bg-zinc-900 rounded-2xl border border-emerald-500/40 relative overflow-hidden flex flex-col justify-between p-3">
+            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#008751_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            
+            <div className="relative z-10 flex justify-between items-center">
+              <span className="bg-emerald-500 text-black font-extrabold text-[10px] px-2 py-0.5 rounded uppercase">
+                GPS LIVE TRACKING: ${type}
+              </span>
+              <span className="text-xs font-mono font-bold text-emerald-400 animate-pulse">● SIGNAL GOOD</span>
+            </div>
+
+            <!-- Simulated Route Center -->
+            <div className="relative z-10 text-center my-auto">
+              <i className="fa-solid fa-location-dot text-3xl text-adwa-gold animate-bounce"></i>
+              <p className="text-[10px] text-zinc-400 mt-1">Simulating route near Meskel Square...</p>
+            </div>
+
+            <div className="relative z-10 bg-black/80 backdrop-blur-md p-2 rounded-xl flex justify-between text-center border border-zinc-800">
+              <div>
+                <p className="text-[9px] text-zinc-400">DISTANCE</p>
+                <p id="track-dist" className="text-base font-black text-white">0.00 KM</p>
+              </div>
+              <div>
+                <p className="text-[9px] text-zinc-400">TIME</p>
+                <p id="track-time" className="text-base font-black text-amber-400">00:00</p>
+              </div>
+              <div>
+                <p className="text-[9px] text-zinc-400">PACE</p>
+                <p id="track-speed" className="text-base font-black text-emerald-400">0.0 km/h</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div className="flex gap-3">
+            <button id="btn-finish-track" onclick="finishGPSSimulation()" className="flex-1 bg-rose-600 hover:bg-rose-500 text-white font-extrabold py-3.5 rounded-xl shadow-lg text-sm">
+              FINISH & VERIFY
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // 7. ACTIVITY RESULT SCREEN
+    function renderActivityResultScreen() {
+      const data = state.trackingData;
+      return `
+        <div className="space-y-5 text-center">
+          <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500 flex items-center justify-center text-2xl mx-auto">
+            <i className="fa-solid fa-circle-check"></i>
+          </div>
+
+          <div>
+            <span className="text-[10px] font-extrabold uppercase text-adwa-gold tracking-widest">VERIFIED COMPLETE</span>
+            <h2 className="text-xl font-black text-white mt-1">ACTIVITY RECORDED!</h2>
+            <p className="text-xs text-zinc-400">Your contribution has been synchronized with the ecosystem.</p>
+          </div>
+
+          <div className="bg-adwa-card border border-zinc-800 p-4 rounded-2xl grid grid-cols-2 gap-3 text-left">
+            <div>
+              <p className="text-[10px] text-zinc-400">DISTANCE COVERED</p>
+              <p className="text-lg font-black text-white">${data.distance.toFixed(2)} KM</p>
+            </div>
+            <div>
+              <p className="text-[10px] text-zinc-400">TOKENS EARNED</p>
+              <p className="text-lg font-black text-adwa-gold">+${Math.floor(data.distance * 50)} PTS</p>
+            </div>
+            <div>
+              <p className="text-[10px] text-zinc-400">CALORIES</p>
+              <p className="text-sm font-bold text-amber-400">${data.calories} KCAL</p>
+            </div>
+            <div>
+              <p className="text-[10px] text-zinc-400">RANK IMPACT</p>
+              <p className="text-sm font-bold text-emerald-400">+2 Positions Up</p>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <button onclick="navigateTo('leaderboard')" className="w-full bg-emerald-500 text-black font-extrabold py-3 rounded-xl text-xs uppercase tracking-wider">
+              View Leaderboard Position
+            </button>
+            <button onclick="navigateTo('home')" className="w-full bg-zinc-900 border border-zinc-800 text-zinc-300 font-bold py-3 rounded-xl text-xs">
+              Return to Ecosystem Home
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // 8. CHALLENGE DETAIL FLOW SCREEN
+    function renderChallengeDetailScreen(challengeId) {
+      const details = {
+        'walk-home': { title: "Adwa Walk Home", target: "2.5 KM", badge: "Traffic Relief", desc: "Walk along verified safe pedestrian corridors during peak traffic hours to earn double points." },
+        '1km-run': { title: "Adwa 1KM Run", target: "1.0 KM", badge: "Sprint", desc: "Entry-level speed sprint. Complete 1 KM to qualify for weekly sponsor draws." },
+        'cause-run': { title: "Adwa Run for Cause", target: "Custom", badge: "Social Impact", desc: "Every verified kilometer walked or run generates 10 ETB donated by corporate partners to local humanitarian projects." },
+        'family': { title: "Family Members Challenge", target: "Team Effort", badge: "Community", desc: "Combine distances with registered family members to move up the family league rankings." },
+        'ethio-telecom': { title: "Ethio telecom Challenge", target: "5.0 KM", badge: "Corporate Sponsored", desc: "Sponsored by Ethio telecom. Top 100 finishers win monthly airtime packages." }
+      }[challengeId] || { title: "Adwa Challenge", target: "1.0 KM", badge: "General", desc: "Participate and verify your physical activity." };
+
+      return `
+        <div className="space-y-5">
+          <button onclick="navigateTo('challenges')" className="text-xs text-zinc-400 font-bold flex items-center gap-1">
+            <i className="fa-solid fa-arrow-left"></i> Back to Challenges
+          </button>
+
+          <div className="bg-adwa-card border border-adwa-gold/40 p-4 rounded-2xl space-y-3">
+            <span className="text-[9px] font-extrabold uppercase text-adwa-gold bg-adwa-gold/10 px-2 py-0.5 rounded">${details.badge}</span>
+            <h2 className="text-xl font-black text-white">${details.title}</h2>
+            <p className="text-xs text-zinc-300 leading-relaxed">${details.desc}</p>
+            
+            <div className="pt-3 border-t border-zinc-800 grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <span className="text-zinc-500">Target Distance:</span>
+                <p className="font-extrabold text-white">${details.target}</p>
+              </div>
+              <div>
+                <span className="text-zinc-500">Participants:</span>
+                <p className="font-extrabold text-emerald-400">1,420 Active</p>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="navigateTo('gps-tracking', {type: '${details.title}'})" className="w-full bg-gradient-to-r from-emerald-500 to-adwa-gold text-black font-black py-3.5 rounded-xl text-sm shadow-lg pulse-ring">
+            START CHALLENGE NOW
+          </button>
+        </div>
+      `;
+    }
+
+    // 9. MARKETPLACE SCREEN
+    function renderMarketplaceScreen() {
+      const products = [
+        { id: 1, name: "Adwa Pro Running Tee", price: "450 PTS", seller: "Adwa Sportswear" },
+        { id: 2, name: "Organic Energy Pack", price: "200 PTS", seller: "Habesha Fuel" },
+        { id: 3, name: "Cycling Helmet Strap", price: "600 PTS", seller: "EcoRide Ethiopia" }
+      ];
+
+      return `
+        <div className="space-y-4">
+          <div className="border-b border-zinc-800 pb-2 flex justify-between items-center">
+            <div>
+              <h2 className="text-lg font-black text-white">ADWA MARKETPLACE</h2>
+              <p className="text-xs text-zinc-400">Redeem activity tokens for products & offers</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-3">
+            ${products.map(p => `
+              <div className="bg-adwa-card border border-zinc-800 p-3 rounded-xl flex justify-between items-center">
+                <div>
+                  <h4 className="text-xs font-bold text-white">${p.name}</h4>
+                  <p className="text-[10px] text-zinc-400">${p.seller}</p>
+                  <p className="text-xs font-black text-adwa-gold mt-1">${p.price}</p>
+                </div>
+                <button onclick="addToCart('${p.name}')" className="bg-zinc-800 hover:bg-zinc-700 text-adwa-gold text-xs font-bold px-3 py-1.5 rounded-lg border border-adwa-gold/30">
+                  Redeem
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // 10. BAKERY DELIVERY SUBSCRIPTION SCREEN
+    function renderBakeryScreen() {
+      return `
+        <div className="space-y-4">
+          <div className="border-b border-zinc-800 pb-2">
+            <h2 className="text-lg font-black text-white">ADWA BAKERY SUBSCRIPTION</h2>
+            <p className="text-xs text-zinc-400">Daily fresh bread delivery powered by eco-riders</p>
+          </div>
+
+          <div className="bg-adwa-card border border-orange-500/40 p-4 rounded-2xl space-y-3">
+            <h3 className="text-sm font-bold text-white">Choose Subscription Plan</h3>
+            <div className="grid grid-cols-3 gap-2 text-center text-xs">
+              <div className="bg-zinc-900 border border-amber-500/50 p-2 rounded-xl cursor-pointer">
+                <p className="font-extrabold text-white">Daily</p>
+                <p className="text-[10px] text-zinc-400">30 ETB/day</p>
+              </div>
+              <div className="bg-amber-500/20 border border-amber-500 p-2 rounded-xl cursor-pointer">
+                <p className="font-extrabold text-amber-400">Weekly</p>
+                <p className="text-[10px] text-zinc-300">200 ETB/wk</p>
+              </div>
+              <div className="bg-zinc-900 border border-zinc-800 p-2 rounded-xl cursor-pointer">
+                <p className="font-extrabold text-white">Monthly</p>
+                <p className="text-[10px] text-zinc-400">750 ETB/mo</p>
+              </div>
+            </div>
+
+            <div className="space-y-2 pt-2">
+              <label className="text-[10px] text-zinc-400 uppercase font-bold">Select Local Bakery Partner</label>
+              <select className="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-2.5 text-xs text-white">
+                <option>Mulmul Bakery - Bole Branch</option>
+                <option>Shoa Bakery - Kazanchis</option>
+                <option>Finfinne Bakery - Sarbet</option>
+              </select>
+            </div>
+
+            <button onclick="alert('Subscription Confirmed! Eco-rider assigned for morning delivery.')" className="w-full bg-orange-500 text-black font-extrabold py-3 rounded-xl text-xs uppercase">
+              Confirm Subscription
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // 11. CYCLING ADS NETWORK SCREEN
+    function renderCyclingAdsScreen() {
+      return `
+        <div className="space-y-4">
+          <div className="border-b border-zinc-800 pb-2">
+            <h2 className="text-lg font-black text-white">ADWA CYCLING ADS NETWORK</h2>
+            <p className="text-xs text-zinc-400">Mobile billboard advertising via verified cyclists</p>
+          </div>
+
+          <!-- Advertiser Metrics Dashboard -->
+          <div className="bg-adwa-card border border-blue-500/40 p-4 rounded-2xl space-y-3">
+            <span className="text-[9px] font-extrabold text-blue-400 uppercase bg-blue-400/10 px-2 py-0.5 rounded">Advertiser Dashboard</span>
+            <div className="grid grid-cols-3 gap-2 text-center">
+              <div className="bg-zinc-900 p-2 rounded-xl">
+                <p className="text-[9px] text-zinc-400">ACTIVE RIDERS</p>
+                <p className="text-base font-black text-white">125</p>
+              </div>
+              <div className="bg-zinc-900 p-2 rounded-xl">
+                <p className="text-[9px] text-zinc-400">COVERAGE</p>
+                <p className="text-base font-black text-emerald-400">4,850 KM</p>
+              </div>
+              <div className="bg-zinc-900 p-2 rounded-xl">
+                <p className="text-[9px] text-zinc-400">IMPRESSIONS</p>
+                <p className="text-base font-black text-amber-400">185K</p>
+              </div>
+            </div>
+
+            <button onclick="alert('Campaign Request Submitted to Adwa Ad Operations!')" className="w-full bg-blue-600 text-white font-extrabold py-2.5 rounded-xl text-xs">
+              Create Campaign
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // 12. FUTSAL TOURNAMENT SCREEN
+    function renderFutsalScreen(tab) {
+      return `
+        <div className="space-y-4">
+          <div className="border-b border-zinc-800 pb-2">
+            <h2 className="text-lg font-black text-white">ADWA FUTSAL LEAGUES</h2>
+            <p className="text-xs text-zinc-400">B2B, Hospitality & Corporate Sports Leagues</p>
+          </div>
+
+          <div className="flex bg-zinc-900 p-1 rounded-xl border border-zinc-800 text-xs font-semibold">
+            <button onclick="navigateTo('service-futsal', {tab: 'hotels'})" className="flex-1 py-1.5 ${tab === 'hotels' ? 'bg-adwa-gold text-black font-extrabold' : 'text-zinc-400'} rounded-lg">
+              Hotels Cup
+            </button>
+            <button onclick="navigateTo('service-futsal', {tab: 'banks'})" className="flex-1 py-1.5 ${tab === 'banks' ? 'bg-adwa-gold text-black font-extrabold' : 'text-zinc-400'} rounded-lg">
+              Banks Championship
+            </button>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="text-xs font-extrabold text-zinc-400 uppercase tracking-wider">Live Fixtures & Results</h3>
+            <div className="bg-adwa-card border border-zinc-800 p-3 rounded-xl flex justify-between items-center text-xs">
+              <span className="font-bold text-white">Sheraton FC</span>
+              <span className="font-black text-emerald-400 bg-zinc-900 px-2 py-1 rounded">3 - 1</span>
+              <span className="font-bold text-white">Skylight FC</span>
+            </div>
+            <div className="bg-adwa-card border border-zinc-800 p-3 rounded-xl flex justify-between items-center text-xs">
+              <span className="font-bold text-white">CBE Futsal</span>
+              <span className="font-black text-amber-400 bg-zinc-900 px-2 py-1 rounded">2 - 2</span>
+              <span className="font-bold text-white">Awash Bank</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // OTHER PLACEHOLDER DASHBOARDS
+    function renderRunDashboard() {
+      return `
+        <div className="space-y-4">
+          <button onclick="navigateTo('home')" className="text-xs text-zinc-400 font-bold"><i className="fa-solid fa-arrow-left"></i> Home</button>
+          <h2 className="text-lg font-black text-amber-400">ADWA RUN DASHBOARD</h2>
+          <p className="text-xs text-zinc-400">Track distance, earn running badges, and participate in organized running events.</p>
+          <button onclick="navigateTo('gps-tracking', {type: 'Run'})" className="w-full bg-amber-500 text-black font-black py-3 rounded-xl text-xs uppercase">Start Running Session</button>
+        </div>
+      `;
+    }
+
+    function renderWalkDashboard() {
+      return `
+        <div className="space-y-4">
+          <button onclick="navigateTo('home')" className="text-xs text-zinc-400 font-bold"><i className="fa-solid fa-arrow-left"></i> Home</button>
+          <h2 className="text-lg font-black text-emerald-400">ADWA WALK DASHBOARD</h2>
+          <p className="text-xs text-zinc-400">Civic step tracking and traffic congestion relief walking programs.</p>
+          <button onclick="navigateTo('gps-tracking', {type: 'Walk'})" className="w-full bg-emerald-500 text-black font-black py-3 rounded-xl text-xs uppercase">Start Walk Home</button>
+        </div>
+      `;
+    }
+
+    function renderCyclingDashboard() {
+      return `
+        <div className="space-y-4">
+          <button onclick="navigateTo('home')" className="text-xs text-zinc-400 font-bold"><i className="fa-solid fa-arrow-left"></i> Home</button>
+          <h2 className="text-lg font-black text-teal-400">ADWA CYCLING DASHBOARD</h2>
+          <p className="text-xs text-zinc-400">Eco-friendly cycling tracking and rider verification.</p>
+          <button onclick="navigateTo('gps-tracking', {type: 'Cycling'})" className="w-full bg-teal-500 text-black font-black py-3 rounded-xl text-xs uppercase">Start Cycling Session</button>
+        </div>
+      `;
+    }
+
+    function renderRewardsScreen() {
+      return `
+        <div className="space-y-4">
+          <button onclick="navigateTo('home')" className="text-xs text-zinc-400 font-bold"><i className="fa-solid fa-arrow-left"></i> Back</button>
+          <h2 className="text-lg font-black text-adwa-gold">REWARDS HUB</h2>
+          <p className="text-xs text-zinc-400">Current Balance: ${state.user.points} PTS</p>
+        </div>
+      `;
+    }
+
+    // --- UTILITY LOGIC ---
+    function addToCart(itemName) {
+      state.cart.push(itemName);
+      document.getElementById('cart-badge').innerText = state.cart.length;
+      alert(`${itemName} redeemed and added to your wallet!`);
+    }
+
+    function initGPSSimulation(type) {
+      state.trackingData = { distance: 0.0, time: 0, calories: 0, speed: 0.0, type: type };
+      if (state.trackingTimer) clearInterval(state.trackingTimer);
+
+      state.trackingTimer = setInterval(() => {
+        state.trackingData.time += 1;
+        state.trackingData.distance += 0.02;
+        state.trackingData.calories += 1;
+        state.trackingData.speed = 12.4;
+
+        const distEl = document.getElementById('track-dist');
+        const timeEl = document.getElementById('track-time');
+        const speedEl = document.getElementById('track-speed');
+
+        if (distEl) distEl.innerText = `${state.trackingData.distance.toFixed(2)} KM`;
+        if (timeEl) {
+          const mins = String(Math.floor(state.trackingData.time / 60)).padStart(2, '0');
+          const secs = String(state.trackingData.time % 60).padStart(2, '0');
+          timeEl.innerText = `${mins}:${secs}`;
+        }
+        if (speedEl) speedEl.innerText = `${state.trackingData.speed} km/h`;
+      }, 1000);
+    }
+
+    function finishGPSSimulation() {
+      if (state.trackingTimer) clearInterval(state.trackingTimer);
+      state.user.points += Math.floor(state.trackingData.distance * 50);
+      state.user.totalDistance += parseFloat(state.trackingData.distance.toFixed(2));
+      navigateTo('activity-result');
+    }
+
+    // INITIAL APP LAUNCH
+    window.onload = () => {
+      navigateTo('home');
+    };
+  </script>
 </body>
-</html>
+  </html>
